@@ -3,8 +3,6 @@
 // ======================
 const TARGET_ID = "bougain";
 const MESSAGE_SECONDS = 15;
-
-// plus grand = plus rare (ex: 7 => ~1 bougain pour 7 spawns)
 const BOUGAIN_RARITY = 7;
 
 // --- FLOWERS ---
@@ -13,7 +11,7 @@ const FLOWERS = [
     id: "f1",
     img: "https://github.com/user-attachments/assets/c3365114-7047-4c05-ae8c-2a6fc07f2c17",
     label: "Bégonia",
-    message: "Symbole de la prudence et de la protection… mais ce n’est pas un bougainvillier."
+    message: "Symbole de la prudence et de la protection… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "bougain",
@@ -25,98 +23,98 @@ const FLOWERS = [
   {
     id: "f3",
     img: "https://github.com/user-attachments/assets/ad8ed4b0-6b57-4107-8944-1f20969afaa0",
-    label: "Broméliacée ",
-    message: "Celle-ci, c’est la résilience, l'unité...mais ce n’est pas un bougainvillier.)"
+    label: "Broméliacée",
+    message: "Celle-ci, c’est la résilience et l’unité… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f4",
     img: "https://github.com/user-attachments/assets/44ec2ab6-626a-458b-aeaf-6ad533073a35",
     label: "Hibiscus",
-    message: "Pour ta féminité, ta douceur...mais ce n’est pas un bougainvillier."
+    message: "Pour ta féminité et ta douceur… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f5",
     img: "https://github.com/user-attachments/assets/e3501e12-5593-49d2-b2e9-74ff90614195",
     label: "Hibiscus",
-    message: "Une autre hibiscus, symbole de ta beauté...mais ce n’est pas un bougainvillier."
+    message: "Une autre hibiscus, symbole de ta beauté… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f6",
     img: "https://github.com/user-attachments/assets/35883ac8-2875-4750-8530-5cef93520c69",
     label: "Hoya",
-    message: "Symbole de l'attachement que j'ai pour toi... mais ce n’est pas un bougainvillier."
+    message: "Symbole de l'attachement que j'ai pour toi… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f7",
     img: "https://github.com/user-attachments/assets/26929324-4854-46b5-a605-3602f1e14e5f",
     label: "Hortensia",
-    message: "Une fleur qui exprime ma gratitude et la reconnaissance que j'ai envers toi...mais ce n’est pas un bougainvillier."
+    message: "Ma gratitude et la reconnaissance que j'ai envers toi… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f8",
     img: "https://github.com/user-attachments/assets/a94dff84-db3f-48d9-a9a8-427442028893",
     label: "Jasmin",
-    message: "Parce que ton amour m'apaise...il est doux...mais ce n’est pas un bougainvillier."
+    message: "Parce que ton amour m’apaise, il est doux… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f9",
     img: "https://github.com/user-attachments/assets/700c902d-0b1c-4db9-9ae9-03fcb27e42bf",
     label: "Jasmin",
-    message: "Une autre fleur de jasmin...mais ce n’est pas un bougainvillier."
+    message: "Une autre fleur de jasmin… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f10",
     img: "https://github.com/user-attachments/assets/e2a37172-6e1e-48cb-899c-f8fae75f9f5e",
     label: "Lantana",
-    message: "Parce que cette relation nous apporte énormément de changements...et aussi de belles surprises...mais ce n’est pas un bougainvillier."
+    message: "Les changements et les belles surprises… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f11",
     img: "https://github.com/user-attachments/assets/77017518-486b-4662-87eb-12859cf70208",
     label: "Lys",
-    message: "Lily pour les intimes...pour l'équilibre qu'on se crée toutes les trois...mais ce n’est pas un bougainvillier."
+    message: "Lily pour les intimes… pour l’équilibre qu’on se crée toutes les trois… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f12",
     img: "https://github.com/user-attachments/assets/a906a7eb-04f3-4b99-9d12-20ed16240c75",
     label: "Orchidée",
-    message: "Une petite fleur luxueuse et rafinée...mais ce n’est pas un bougainvillier."
+    message: "Une petite fleur luxueuse et raffinée… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f13",
     img: "https://github.com/user-attachments/assets/e4e3503c-b7bd-4486-88e9-a4da224a5c18",
     label: "Poinsettia",
-    message: "Pour la renaissance, la transformation...mais ce n’est pas un bougainvillier."
+    message: "La renaissance et la transformation… Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f14",
     img: "https://github.com/user-attachments/assets/82e25fe3-6541-441b-a9b3-b10bead438c7",
     label: "Rose",
-    message: "Elle me fait penser à tes yeux quand tu es concentrée… et je fonds. Mais ce n’est pas un bougainvillier."
+    message: "Elle me fait penser à tes yeux quand tu es concentrée… et je fonds. Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f15",
     img: "https://github.com/user-attachments/assets/f82fd824-6847-49ee-b7f8-e6cea4f5a7af",
     label: "Sisyrinchium",
-    message: "Cette fleur, c’est l’affection tranquille. Celle qui dure. Mais ce n’est pas un bougainvillier."
+    message: "L’affection tranquille. Celle qui dure. Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f16",
     img: "https://github.com/user-attachments/assets/d192016c-4938-41c3-872b-3a322ae6a36b",
     label: "Arugula",
-    message: "Jolie, délicate… et pourtant forte. Ça te décrit parfaitement. Mais ce n’est pas un bougainvillier."
+    message: "Jolie, délicate… et pourtant forte. Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f17",
     img: "https://github.com/user-attachments/assets/66bafcaa-49d8-47cd-b2ba-484869d76c6a",
     label: "Amaryllis",
-    message: "Une fleur qui donne envie de dire merci… merci d’être toi. Mais ce n’est pas un bougainvillier."
+    message: "Merci… merci d’être toi. Cependant. Ce n’est pas un bougainvillier."
   },
   {
     id: "f18",
     img: "https://github.com/user-attachments/assets/0521e833-0503-407f-95a8-afea74a7d9c0",
     label: "Anthurium",
-    message: "Encore une belle fleur… mais la bonne fleur, c’est celle qui me mène à toi. Pas un bougainvillier."
+    message: "Encore une belle fleur… mais la bonne fleur, c’est celle qui me mène à toi. Cependant. Ce n’est pas un bougainvillier."
   }
 ];
 
@@ -129,7 +127,6 @@ const proposal = document.getElementById("proposal");
 const gift = document.getElementById("gift");
 const burst = document.getElementById("burst");
 
-// ✅ header accueil
 const topHeader = document.querySelector(".top");
 
 const overlayFlower = document.getElementById("overlayFlower");
@@ -144,13 +141,13 @@ const loveTimerEl = document.getElementById("loveTimer");
 let proposalStart = null;
 let proposalInterval = null;
 
-const giftBtn = document.getElementById("giftBtn");
-let openProgress = 0;
-let giftOpened = false;
-
 let overlayTimer = null;
 let countdownTimer = null;
 let isLocked = false;
+
+// cadeau multi-tap
+let openProgress = 0;
+let giftOpened = false;
 
 // ======================
 // HELPERS
@@ -164,20 +161,25 @@ function clearTimers(){
   countdownTimer = null;
 }
 
+function showTop(){
+  topHeader.classList.remove("hideTop"); // ✅ Option B
+}
+function hideTop(){
+  topHeader.classList.add("hideTop"); // ✅ Option B
+}
+
 function hideAllScreens(){
   overlay.classList.add("hidden");
   proposal.classList.add("hidden");
   gift.classList.add("hidden");
   burst.classList.add("hidden");
-
-  // ✅ par défaut, l'accueil doit afficher le header
-  topHeader.classList.remove("hidden");
 }
 
 function resetToHome(){
   clearTimers();
   stopProposalTimer();
   hideAllScreens();
+  showTop();
   isLocked = false;
 }
 
@@ -207,7 +209,7 @@ function stopProposalTimer(){
 }
 
 // ======================
-// FLOWERS GENERATION (rarity + drift everywhere)
+// FLOWERS GENERATION
 // ======================
 const BOUGAIN = FLOWERS.find(f => f.id === TARGET_ID);
 
@@ -227,7 +229,6 @@ function spawnFloatingFlower(flower){
   el.type = "button";
   el.setAttribute("aria-label", flower.label);
 
-  // image
   const img = document.createElement("img");
   img.src = flower.img;
   img.alt = flower.label;
@@ -235,20 +236,17 @@ function spawnFloatingFlower(flower){
   img.className = "flowerImg";
   el.appendChild(img);
 
-  // glow sur bougainvillier
   if (flower.id === TARGET_ID) el.classList.add("bougainGlow");
 
-  // position départ
   el.style.left = `${rand(8, 92)}%`;
   el.style.top  = `${rand(10, 92)}%`;
 
-  // trajectoires
   el.style.setProperty("--dx1", `${rand(-20, 20)}vw`);
   el.style.setProperty("--dy1", `${rand(-25, 25)}vh`);
   el.style.setProperty("--dx2", `${rand(-30, 30)}vw`);
   el.style.setProperty("--dy2", `${rand(-35, 35)}vh`);
 
-  const duration = rand(7, 13); // secondes
+  const duration = rand(7, 13);
   const delay = rand(0, 1.2);
   el.style.animation = `drift ${duration}s ease-in-out ${delay}s infinite alternate`;
 
@@ -265,16 +263,13 @@ function buildField(){
 }
 
 // ======================
-// INTERACTIONS
+// OVERLAY / PROPOSAL
 // ======================
 function showOverlay(flower, onDone){
   isLocked = true;
   hideAllScreens();
+  hideTop();
 
-  // ✅ on cache le header d'accueil pendant l'overlay
-  topHeader.classList.add("hidden");
-
-  // image dans l’overlay
   overlayFlower.innerHTML = "";
   const big = document.createElement("img");
   big.src = flower.img;
@@ -296,7 +291,9 @@ function showOverlay(flower, onDone){
   countdownTimer = setInterval(() => {
     remaining -= 1;
     countdownEl.textContent = Math.max(0, remaining);
-    if (remaining <= 0) clearTimers();
+    if (remaining <= 0) {
+      clearTimers();
+    }
   }, 1000);
 
   overlayTimer = setTimeout(() => {
@@ -319,12 +316,11 @@ function onFlowerClick(flower){
     return;
   }
 
-  // bougain
+  // bougain -> proposal
   showOverlay(flower, () => {
-    // ✅ proposition = header caché aussi
-    topHeader.classList.add("hideTop");
-
-    proposal.classList.remove("hidTop");
+    hideAllScreens();
+    hideTop();
+    proposal.classList.remove("hidden");
     startProposalTimer();
     isLocked = false;
   });
@@ -336,13 +332,12 @@ function onFlowerClick(flower){
 function playGiftSequence(includeBougain){
   isLocked = true;
   hideAllScreens();
+  hideTop();
   stopProposalTimer();
 
-  // attente 5s après choix
   setTimeout(() => {
-    // ✅ cadeau = header caché aussi
-    topHeader.classList.add("hidden");
-
+    hideAllScreens();
+    hideTop();
     gift.classList.remove("hidden");
     setupTapToOpenGift(includeBougain);
     isLocked = false;
@@ -353,13 +348,14 @@ function setupTapToOpenGift(includeBougain){
   openProgress = 0;
   giftOpened = false;
 
-  giftBtn.style.setProperty("--lid-rot", "0deg");
-  giftBtn.style.setProperty("--lid-up", "0px");
-  giftBtn.style.animation = "none";
+  const oldBtn = document.getElementById("giftBtn");
+  oldBtn.style.setProperty("--lid-rot", "0deg");
+  oldBtn.style.setProperty("--lid-up", "0px");
+  oldBtn.style.animation = "none";
 
-  // on évite d’empiler les listeners
-  const newBtn = giftBtn.cloneNode(true);
-  giftBtn.parentNode.replaceChild(newBtn, giftBtn);
+  // évite d’empiler les listeners
+  const newBtn = oldBtn.cloneNode(true);
+  oldBtn.parentNode.replaceChild(newBtn, oldBtn);
 
   newBtn.addEventListener("click", () => {
     if (giftOpened) return;
@@ -426,4 +422,5 @@ btnYesWithout.addEventListener("click", () => playGiftSequence(false));
 // ======================
 // INIT
 // ======================
+resetToHome();
 buildField();
