@@ -175,17 +175,22 @@ function onFlowerClick(flower){
 
   // Bougainvillier: overlay 30s puis proposition
   showOverlay(flower, () => {
-    overlay.classList.add("hidden");
     proposal.classList.remove("hidden");
+  startProposalTimer();
     isLocked = false; // on autorise les boutons
   });
 }
 
-function playGiftSequence(includeBougain){
+function playGiftSequence(includeBougain, elapsedSeconds){
   isLocked = true;
   hideAllScreens();
-  gift.classList.remove("hidden");
 
+  // Optionnel: tu peux afficher un petit message pendant 5s ici (si tu veux)
+  setTimeout(() => {
+    gift.classList.remove("hidden");
+    setupTapToOpenGift(includeBougain);
+  }, 5000);
+}
   // ouvrir le couvercle après petit délai
   const lid = document.querySelector(".giftLid");
   lid.style.animation = "none";
@@ -243,8 +248,17 @@ function launchBurst(includeBougain){
 // ======================
 // BUTTONS
 // ======================
-btnYesWith.addEventListener("click", () => playGiftSequence(true));
-btnYesWithout.addEventListener("click", () => playGiftSequence(false));
+btnYesWith.addEventListener("click", () => {
+  const elapsed = Math.floor((Date.now() - proposalStart)/1000);
+  stopProposalTimer();
+  playGiftSequence(true, elapsed);
+});
+
+btnYesWithout.addEventListener("click", () => {
+  const elapsed = Math.floor((Date.now() - proposalStart)/1000);
+  stopProposalTimer();
+  playGiftSequence(false, elapsed);
+});
 
 // ======================
 // INIT
