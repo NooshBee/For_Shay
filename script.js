@@ -34,6 +34,35 @@ let overlayTimer = null;
 let countdownTimer = null;
 let isLocked = false;
 
+const loveTimerEl = document.getElementById("loveTimer");
+let proposalStart = null;
+let proposalInterval = null;
+
+function formatTime(sec){
+  if (sec < 60) return `${sec} seconde${sec>1?"s":""}`;
+  const m = Math.floor(sec/60);
+  const s = sec % 60;
+  return `${m} minute${m>1?"s":""} ${s} seconde${s>1?"s":""}`;
+}
+
+function startProposalTimer(){
+  proposalStart = Date.now();
+  if (proposalInterval) clearInterval(proposalInterval);
+
+  const tick = () => {
+    const sec = Math.floor((Date.now() - proposalStart)/1000);
+    loveTimerEl.textContent = `${formatTime(sec)} avant d’accepter mon amour ?`;
+  };
+
+  tick();
+  proposalInterval = setInterval(tick, 1000);
+}
+
+function stopProposalTimer(){
+  if (proposalInterval) clearInterval(proposalInterval);
+  proposalInterval = null;
+}
+
 // ======================
 // HELPERS
 // ======================
