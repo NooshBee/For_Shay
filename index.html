@@ -1,1 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🌸 Pour toi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1 id="title">Choisis une fleur</h1>
+      <p id="subtitle">Touche une fleur qui flotte… 🌷</p>
+    </header>
 
+    <!-- Zone des fleurs -->
+    <section id="field" class="field" aria-label="Fleurs flottantes"></section>
+
+    <!-- Overlay message (30s) -->
+    <section id="overlay" class="overlay hidden" role="dialog" aria-live="polite">
+      <div class="card">
+        <div id="overlayFlower" class="bigFlower">🌸</div>
+        <h2 id="overlayTitle">Message</h2>
+        <p id="overlayText"></p>
+        <p class="hint">⏳ Retour dans <span id="countdown">30</span>s</p>
+      </div>
+    </section>
+
+    <!-- Écran proposition -->
+    <section id="proposal" class="proposal hidden" aria-live="polite">
+      <div class="card proposalCard">
+        <div class="bigFlower">💖</div>
+        <h2>Voudrais-tu me faire le plaisir d’être ma Valentine ?</h2>
+        <div class="buttons">
+          <button id="btnYesWith" class="btn primary">Oui (avec bougainvillier) 🌸</button>
+          <button id="btnYesWithout" class="btn secondary">Oui (sans bougainvillier) 🌷</button>
+        </div>
+        <p class="small">Je t’aime fort.</p>
+      </div>
+    </section>
+
+    <!-- Animation cadeau -->
+    <section id="gift" class="gift hidden" aria-live="polite">
+      <div class="giftWrap">
+        <div class="giftBox">
+          <div class="giftLid"></div>
+          <div class="giftBody"></div>
+          <div class="giftRibbon"></div>
+        </div>
+        <p class="giftText">🎁 Ouvre ton cadeau…</p>
+      </div>
+    </section>
+
+    <!-- Explosion bouquet -->
+    <section id="burst" class="burst hidden" aria-hidden="true"></section>
+
+    <footer class="footer">
+      <span>✨ Made with love</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
