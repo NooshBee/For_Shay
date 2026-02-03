@@ -11,7 +11,7 @@ const FLOWERS = [
 ];
 
 const TARGET_ID = "bougain"; // la bonne fleur
-const MESSAGE_SECONDS = 30;
+const MESSAGE_SECONDS = 15;
 
 // ======================
 // STATE
@@ -69,17 +69,21 @@ function spawnFloatingFlower(flower){
   el.setAttribute("aria-label", flower.label);
   el.textContent = flower.emoji;
 
-  // random position near bottom half to float upward
-  const x = rand(10, 90);   // %
-  const y = rand(65, 95);   // %
-
+  // Position de départ n'importe où
+  const x = rand(8, 92);
+  const y = rand(10, 92);
   el.style.left = `${x}%`;
   el.style.top  = `${y}%`;
 
-  // animations
-  const duration = rand(6.5, 11.5);
-  const delay = rand(0, 2.5);
-  el.style.animation = `floatUp ${duration}s linear ${delay}s infinite, sway ${rand(2.2, 3.8)}s ease-in-out ${rand(0,1)}s infinite`;
+  // Trajectoires aléatoires (les variables CSS)
+  el.style.setProperty("--dx1", `${rand(-20, 20)}vw`);
+  el.style.setProperty("--dy1", `${rand(-25, 25)}vh`);
+  el.style.setProperty("--dx2", `${rand(-30, 30)}vw`);
+  el.style.setProperty("--dy2", `${rand(-35, 35)}vh`);
+
+  const duration = rand(6.5, 12);
+  const delay = rand(0, 1.2);
+  el.style.animation = `drift ${duration}s ease-in-out ${delay}s infinite alternate`;
 
   el.addEventListener("click", () => onFlowerClick(flower));
   field.appendChild(el);
