@@ -4,136 +4,40 @@
 const TARGET_ID = "bougain";
 const MESSAGE_SECONDS = 15;
 
-// 3 fleurs par variété => 18 * 3 = 54
-const MIN_PER_VARIETY = 3;
-
-// grille 6 colonnes x 9 lignes = 54 cases
+const MIN_PER_VARIETY = 3; // 3 fleurs par variété
 const GRID_COLS = 6;
-const GRID_ROWS = 9;
+const GRID_ROWS = 9; // 6x9 = 54
 
 // --- FLOWERS ---
 const FLOWERS = [
-  {
-    id: "f1",
-    img: "https://github.com/user-attachments/assets/c3365114-7047-4c05-ae8c-2a6fc07f2c17",
-    label: "Bégonia",
-    message: "Symbole de la prudence et de la protection… mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "bougain",
-    img: "https://github.com/user-attachments/assets/8fb5b985-b8b4-4a9a-ae6f-2515ceb81f5f",
-    label: "Un Bougainvillier",
-    isBougain: true,
-    message: "Ta fleur préféré :) Je te l’offre comme symbole de l'abondance et de la joie que je ressens lorsque je suis avec toi."
-  },
-  {
-    id: "f3",
-    img: "https://github.com/user-attachments/assets/ad8ed4b0-6b57-4107-8944-1f20969afaa0",
-    label: "Broméliacée ",
-    message: "Celle-ci, c’est la résilience, l'unité...mais ce n’est pas un bougainvillier.)"
-  },
-  {
-    id: "f4",
-    img: "https://github.com/user-attachments/assets/44ec2ab6-626a-458b-aeaf-6ad533073a35",
-    label: "Hibiscus",
-    message: "Pour ta féminité, ta douceur...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f5",
-    img: "https://github.com/user-attachments/assets/e3501e12-5593-49d2-b2e9-74ff90614195",
-    label: "Hibiscus",
-    message: "Une autre hibiscus, symbole de ta beauté...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f6",
-    img: "https://github.com/user-attachments/assets/35883ac8-2875-4750-8530-5cef93520c69",
-    label: "Hoya",
-    message: "Symbole de l'attachement que j'ai pour toi... mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f7",
-    img: "https://github.com/user-attachments/assets/26929324-4854-46b5-a605-3602f1e14e5f",
-    label: "Hortensia",
-    message: "Une fleur qui exprime ma gratitude et la reconnaissance que j'ai envers toi...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f8",
-    img: "https://github.com/user-attachments/assets/a94dff84-db3f-48d9-a9a8-427442028893",
-    label: "Jasmin",
-    message: "Parce que ton amour m'apaise...il est doux...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f9",
-    img: "https://github.com/user-attachments/assets/700c902d-0b1c-4db9-9ae9-03fcb27e42bf",
-    label: "Jasmin",
-    message: "Une autre fleur de jasmin...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f10",
-    img: "https://github.com/user-attachments/assets/e2a37172-6e1e-48cb-899c-f8fae75f9f5e",
-    label: "Lantana",
-    message: "Parce que cette relation nous apporte énormément de changements...et aussi de belles surprises...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f11",
-    img: "https://github.com/user-attachments/assets/77017518-486b-4662-87eb-12859cf70208",
-    label: "Lys",
-    message: "Lily pour les intimes...pour l'équilibre qu'on se crée toutes les trois...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f12",
-    img: "https://github.com/user-attachments/assets/a906a7eb-04f3-4b99-9d12-20ed16240c75",
-    label: "Orchidée",
-    message: "Une petite fleur luxueuse et rafinée...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f13",
-    img: "https://github.com/user-attachments/assets/e4e3503c-b7bd-4486-88e9-a4da224a5c18",
-    label: "Poinsettia",
-    message: "Pour la renaissance, la transformation...mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f14",
-    img: "https://github.com/user-attachments/assets/82e25fe3-6541-441b-a9b3-b10bead438c7",
-    label: "Rose",
-    message: "Elle me fait penser à tes yeux quand tu es concentrée… et je fonds. Mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f15",
-    img: "https://github.com/user-attachments/assets/f82fd824-6847-49ee-b7f8-e6cea4f5a7af",
-    label: "Sisyrinchium",
-    message: "Cette fleur, c’est l’affection tranquille. Celle qui dure. Mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f16",
-    img: "https://github.com/user-attachments/assets/d192016c-4938-41c3-872b-3a322ae6a36b",
-    label: "Arugula",
-    message: "Jolie, délicate… et pourtant forte. Ça te décrit parfaitement. Mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f17",
-    img: "https://github.com/user-attachments/assets/66bafcaa-49d8-47cd-b2ba-484869d76c6a",
-    label: "Amaryllis",
-    message: "Une fleur qui donne envie de dire merci… merci d’être toi. Mais ce n’est pas un bougainvillier."
-  },
-  {
-    id: "f18",
-    img: "https://github.com/user-attachments/assets/0521e833-0503-407f-95a8-afea74a7d9c0",
-    label: "Anthurium",
-    message: "Encore une belle fleur… mais la bonne fleur, c’est celle qui me mène à toi. Pas un bougainvillier."
-  }
+  { id: "f1", img: "https://github.com/user-attachments/assets/c3365114-7047-4c05-ae8c-2a6fc07f2c17", label: "Bégonia", message: "Symbole de la prudence et de la protection… mais ce n’est pas un bougainvillier." },
+  { id: "bougain", img: "https://github.com/user-attachments/assets/8fb5b985-b8b4-4a9a-ae6f-2515ceb81f5f", label: "Un Bougainvillier", isBougain: true, message: "Ta fleur préféré :) Je te l’offre comme symbole de l'abondance et de la joie que je ressens lorsque je suis avec toi." },
+  { id: "f3", img: "https://github.com/user-attachments/assets/ad8ed4b0-6b57-4107-8944-1f20969afaa0", label: "Broméliacée", message: "Celle-ci, c’est la résilience, l'unité... mais ce n’est pas un bougainvillier." },
+  { id: "f4", img: "https://github.com/user-attachments/assets/44ec2ab6-626a-458b-aeaf-6ad533073a35", label: "Hibiscus", message: "Pour ta féminité, ta douceur... mais ce n’est pas un bougainvillier." },
+  { id: "f5", img: "https://github.com/user-attachments/assets/e3501e12-5593-49d2-b2e9-74ff90614195", label: "Hibiscus", message: "Une autre hibiscus, symbole de ta beauté... mais ce n’est pas un bougainvillier." },
+  { id: "f6", img: "https://github.com/user-attachments/assets/35883ac8-2875-4750-8530-5cef93520c69", label: "Hoya", message: "Symbole de l'attachement que j'ai pour toi... mais ce n’est pas un bougainvillier." },
+  { id: "f7", img: "https://github.com/user-attachments/assets/26929324-4854-46b5-a605-3602f1e14e5f", label: "Hortensia", message: "Une fleur qui exprime ma gratitude et la reconnaissance que j'ai envers toi... mais ce n’est pas un bougainvillier." },
+  { id: "f8", img: "https://github.com/user-attachments/assets/a94dff84-db3f-48d9-a9a8-427442028893", label: "Jasmin", message: "Parce que ton amour m'apaise... il est doux... mais ce n’est pas un bougainvillier." },
+  { id: "f9", img: "https://github.com/user-attachments/assets/700c902d-0b1c-4db9-9ae9-03fcb27e42bf", label: "Jasmin", message: "Une autre fleur de jasmin... mais ce n’est pas un bougainvillier." },
+  { id: "f10", img: "https://github.com/user-attachments/assets/e2a37172-6e1e-48cb-899c-f8fae75f9f5e", label: "Lantana", message: "Parce que cette relation nous apporte énormément de changements... et aussi de belles surprises... mais ce n’est pas un bougainvillier." },
+  { id: "f11", img: "https://github.com/user-attachments/assets/77017518-486b-4662-87eb-12859cf70208", label: "Lys", message: "Lily pour les intimes... pour l'équilibre qu'on se crée toutes les trois... mais ce n’est pas un bougainvillier." },
+  { id: "f12", img: "https://github.com/user-attachments/assets/a906a7eb-04f3-4b99-9d12-20ed16240c75", label: "Orchidée", message: "Une petite fleur luxueuse et rafinée... mais ce n’est pas un bougainvillier." },
+  { id: "f13", img: "https://github.com/user-attachments/assets/e4e3503c-b7bd-4486-88e9-a4da224a5c18", label: "Poinsettia", message: "Pour la renaissance, la transformation... mais ce n’est pas un bougainvillier." },
+  { id: "f14", img: "https://github.com/user-attachments/assets/82e25fe3-6541-441b-a9b3-b10bead438c7", label: "Rose", message: "Elle me fait penser à tes yeux quand tu es concentrée… et je fonds. Mais ce n’est pas un bougainvillier." },
+  { id: "f15", img: "https://github.com/user-attachments/assets/f82fd824-6847-49ee-b7f8-e6cea4f5a7af", label: "Sisyrinchium", message: "Cette fleur, c’est l’affection tranquille. Celle qui dure. Mais ce n’est pas un bougainvillier." },
+  { id: "f16", img: "https://github.com/user-attachments/assets/d192016c-4938-41c3-872b-3a322ae6a36b", label: "Arugula", message: "Jolie, délicate… et pourtant forte. Ça te décrit parfaitement. Mais ce n’est pas un bougainvillier." },
+  { id: "f17", img: "https://github.com/user-attachments/assets/66bafcaa-49d8-47cd-b2ba-484869d76c6a", label: "Amaryllis", message: "Une fleur qui donne envie de dire merci… merci d’être toi. Mais ce n’est pas un bougainvillier." },
+  { id: "f18", img: "https://github.com/user-attachments/assets/0521e833-0503-407f-95a8-afea74a7d9c0", label: "Anthurium", message: "Encore une belle fleur… mais la bonne fleur, c’est celle qui me mène à toi. Pas un bougainvillier." }
 ];
 
 // ======================
-// DOM
+// DOM (avec garde-fous)
 // ======================
 const field = document.getElementById("field");
 const overlay = document.getElementById("overlay");
 const proposal = document.getElementById("proposal");
 const gift = document.getElementById("gift");
 const burst = document.getElementById("burst");
-
-const topHeader = document.querySelector(".top");
 
 const overlayFlower = document.getElementById("overlayFlower");
 const overlayTitle = document.getElementById("overlayTitle");
@@ -144,6 +48,35 @@ const btnYesWith = document.getElementById("btnYesWith");
 const btnYesWithout = document.getElementById("btnYesWithout");
 
 const loveTimerEl = document.getElementById("loveTimer");
+
+const topHeader = document.querySelector(".top");
+
+// ======================
+// DEBUG visible (si crash)
+// ======================
+function fatal(msg){
+  const d = document.createElement("div");
+  d.style.position = "fixed";
+  d.style.left = "12px";
+  d.style.right = "12px";
+  d.style.bottom = "12px";
+  d.style.zIndex = "99999";
+  d.style.padding = "12px 14px";
+  d.style.borderRadius = "14px";
+  d.style.background = "rgba(0,0,0,0.75)";
+  d.style.color = "white";
+  d.style.fontSize = "14px";
+  d.style.lineHeight = "1.3";
+  d.textContent = "Erreur script: " + msg;
+  document.body.appendChild(d);
+}
+
+// éléments indispensables
+if (!field) fatal("Je ne trouve pas #field dans index.html");
+if (!overlay || !proposal || !gift || !burst) fatal("Il manque overlay/proposal/gift/burst dans index.html");
+if (!overlayFlower || !overlayTitle || !overlayText || !countdownEl) fatal("Il manque overlayFlower/overlayTitle/overlayText/countdown dans index.html");
+if (!btnYesWith || !btnYesWithout) fatal("Il manque btnYesWith / btnYesWithout");
+if (!loveTimerEl) fatal("Il manque #loveTimer");
 
 // ======================
 // STATE
@@ -177,8 +110,12 @@ function clearTimers(){
   countdownTimer = null;
 }
 
-function showTop(){ topHeader.classList.remove("hideTop"); }
-function hideTop(){ topHeader.classList.add("hideTop"); }
+function safeShowTop(){
+  if (topHeader) topHeader.classList.remove("hideTop");
+}
+function safeHideTop(){
+  if (topHeader) topHeader.classList.add("hideTop");
+}
 
 function hideAllScreens(){
   overlay.classList.add("hidden");
@@ -191,7 +128,7 @@ function resetToHome(){
   clearTimers();
   stopProposalTimer();
   hideAllScreens();
-  showTop();
+  safeShowTop();
   isLocked = false;
 }
 
@@ -210,7 +147,6 @@ function startProposalTimer(){
     const sec = Math.floor((Date.now() - proposalStart)/1000);
     loveTimerEl.textContent = `${formatTime(sec)} avant d’accepter mon amour ?`;
   };
-
   tick();
   proposalInterval = setInterval(tick, 1000);
 }
@@ -220,10 +156,10 @@ function stopProposalTimer(){
   proposalInterval = null;
 }
 
-// ---- NO-GO ZONE from .topCard (automatic) ----
+// ---- NO-GO ZONE automatic from .topCard ----
 function getNoGoRectPercent(){
   const card = document.querySelector(".topCard");
-  if (!card) return null;
+  if (!card) return null; // continue sans zone interdite
 
   const r = card.getBoundingClientRect();
   const vw = window.innerWidth;
@@ -236,13 +172,12 @@ function getNoGoRectPercent(){
     yMax: (r.bottom / vh) * 100,
   };
 }
-
 function inRect(x, y, rect){
   return x >= rect.xMin && x <= rect.xMax && y >= rect.yMin && y <= rect.yMax;
 }
 
 // ======================
-// FLOWERS (54 fixed grid, never under topCard)
+// FLOWERS (54 fixed)
 // ======================
 function buildField(){
   field.innerHTML = "";
@@ -252,11 +187,16 @@ function buildField(){
     for (let i = 0; i < MIN_PER_VARIETY; i++) list.push(f);
   });
 
+  // sécurité : si un jour ça ne fait pas 54, on complète
+  while (list.length < GRID_COLS * GRID_ROWS){
+    list.push(FLOWERS[Math.floor(Math.random() * FLOWERS.length)]);
+  }
+
   shuffleInPlace(list);
 
   const noGo = getNoGoRectPercent();
 
-  list.forEach((flower, idx) => {
+  list.slice(0, GRID_COLS * GRID_ROWS).forEach((flower, idx) => {
     const col = idx % GRID_COLS;
     const row = Math.floor(idx / GRID_COLS);
 
@@ -272,14 +212,11 @@ function buildField(){
     let x = baseX + jitterX;
     let y = baseY + jitterY;
 
-    // Evite la carte : on retente un jitter plus large dans la même case
     if (noGo){
       let tries = 0;
       while (inRect(x, y, noGo) && tries < 25){
-        const jitterX2 = rand(-cellW * 0.45, cellW * 0.45);
-        const jitterY2 = rand(-cellH * 0.45, cellH * 0.45);
-        x = baseX + jitterX2;
-        y = baseY + jitterY2;
+        x = baseX + rand(-cellW * 0.45, cellW * 0.45);
+        y = baseY + rand(-cellH * 0.45, cellH * 0.45);
         tries++;
       }
     }
@@ -295,7 +232,6 @@ function spawnFloatingFlower(flower, slotIndex, xPercent, yPercent){
   el.setAttribute("aria-label", flower.label);
 
   el.dataset.slot = String(slotIndex);
-  el.dataset.fid = flower.id;
 
   const img = document.createElement("img");
   img.src = flower.img;
@@ -309,7 +245,7 @@ function spawnFloatingFlower(flower, slotIndex, xPercent, yPercent){
   el.style.left = `${xPercent}%`;
   el.style.top  = `${yPercent}%`;
 
-  // drift réduit pour limiter les passages sous la carte
+  // drift réduit
   el.style.setProperty("--dx1", `${rand(-6, 6)}vw`);
   el.style.setProperty("--dy1", `${rand(-6, 6)}vh`);
   el.style.setProperty("--dx2", `${rand(-8, 8)}vw`);
@@ -322,7 +258,7 @@ function spawnFloatingFlower(flower, slotIndex, xPercent, yPercent){
   el.addEventListener("click", () => {
     if (isLocked) return;
 
-    // positions stables => respawn même variété même endroit
+    // respawn immédiat même fleur au même endroit
     const slot = Number(el.dataset.slot);
     const x = parseFloat(el.style.left);
     const y = parseFloat(el.style.top);
@@ -342,7 +278,7 @@ function spawnFloatingFlower(flower, slotIndex, xPercent, yPercent){
 function showOverlay(flower, onDone){
   isLocked = true;
   hideAllScreens();
-  hideTop();
+  safeHideTop();
 
   overlayFlower.innerHTML = "";
   const big = document.createElement("img");
@@ -383,14 +319,14 @@ function onFlowerClick(flower){
   if (!isTarget){
     showOverlay(flower, () => {
       resetToHome();
-      // on ne rebuild pas ici : les 54 fleurs restent, et la cliquée a déjà été remplacée
+      // pas de rebuild ici : les 54 restent en place
     });
     return;
   }
 
   showOverlay(flower, () => {
     hideAllScreens();
-    hideTop();
+    safeHideTop();
     proposal.classList.remove("hidden");
     startProposalTimer();
     isLocked = false;
@@ -403,12 +339,12 @@ function onFlowerClick(flower){
 function playGiftSequence(includeBougain){
   isLocked = true;
   hideAllScreens();
-  hideTop();
+  safeHideTop();
   stopProposalTimer();
 
   setTimeout(() => {
     hideAllScreens();
-    hideTop();
+    safeHideTop();
     gift.classList.remove("hidden");
     setupTapToOpenGift(includeBougain);
     isLocked = false;
@@ -420,11 +356,12 @@ function setupTapToOpenGift(includeBougain){
   giftOpened = false;
 
   const oldBtn = document.getElementById("giftBtn");
+  if (!oldBtn){ fatal("Je ne trouve pas #giftBtn dans index.html"); return; }
+
   oldBtn.style.setProperty("--lid-rot", "0deg");
   oldBtn.style.setProperty("--lid-up", "0px");
   oldBtn.style.animation = "none";
 
-  // évite empilement listeners
   const newBtn = oldBtn.cloneNode(true);
   oldBtn.parentNode.replaceChild(newBtn, oldBtn);
 
@@ -446,7 +383,7 @@ function setupTapToOpenGift(includeBougain){
 
         setTimeout(() => {
           resetToHome();
-          buildField(); // recommence après le cadeau
+          buildField();
         }, 2800);
       }, 950);
     }
@@ -490,12 +427,8 @@ function launchBurst(includeBougain){
 btnYesWith.addEventListener("click", () => playGiftSequence(true));
 btnYesWithout.addEventListener("click", () => playGiftSequence(false));
 
-// recalcul si changement d’écran (rotation iPhone, etc.)
-window.addEventListener("resize", () => {
-  // On rebuild pour re-prendre la taille réelle de la topCard
-  // (sinon la zone interdite peut être mauvaise)
-  buildField();
-});
+// recalcul si rotation / resize
+window.addEventListener("resize", () => buildField());
 
 // ======================
 // INIT
