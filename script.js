@@ -489,20 +489,27 @@ function setupTapToOpenGift(includeBougain){
   let giftBtn = document.getElementById("giftBtn");
   if (!giftBtn) return;
 
+  // reset variables (PAS d'animation none ici)
   giftBtn.style.setProperty("--lid-rot", "0deg");
   giftBtn.style.setProperty("--lid-up", "0px");
   giftBtn.style.setProperty("--box-scale", "1");
-  giftBtn.style.animation = "none";
+  giftBtn.style.removeProperty("animation"); // ✅ laisse l'animation CSS vivre
 
+  // clone propre pour éviter empilement listeners
   const newBtn = giftBtn.cloneNode(true);
   giftBtn.parentNode.replaceChild(newBtn, giftBtn);
+
+  // ✅ IMPORTANT : on FORCE la secousse au moment où le cadeau apparaît
+  newBtn.style.animation = "giftShake 3.2s ease-in-out infinite";
 
   const TOTAL_TAPS = 4;
   let taps = 0;
   let giftOpened = false;
 
   newBtn.addEventListener("click", () => {
+    // ✅ stop secousse dès le 1er tap
     newBtn.style.animation = "none";
+
     if (giftOpened) return;
 
     taps += 1;
@@ -517,38 +524,30 @@ function setupTapToOpenGift(includeBougain){
     if (taps >= TOTAL_TAPS){
       giftOpened = true;
 
+      // gonflage automatique (continue)
       newBtn.style.animation = "autoInflate 1100ms ease-in forwards";
 
       setTimeout(() => {
         gift.classList.add("hidden");
 
-        // ✅ coeur explose AU MÊME MOMENT
+        // coeur explose en même temps (tu l’as déjà)
         explodeHeart(650);
 
-        // (si tu ne veux plus de confettis, commente ces 2 lignes)
+        // confettis (si tu veux encore)
         burst.classList.remove("hidden");
         launchBurst(includeBougain);
 
         setTimeout(() => {
-          // (si tu gardes burst)
           burst.classList.add("hidden");
-
-          // ✅ repart flotter
           lockFlowersClicks(false);
           resumeFloating();
-
-          // ✅ retour accueil (tu peux enlever resetToHome si tu veux rester sans le header)
           resetToHome();
-
-          // ❌ IMPORTANT : on NE rebuild PAS ici (sinon ça "reset" tout)
-          // buildField();
         }, 2800);
 
       }, 1150);
     }
   });
 }
-
 // ======================
 // EXPLOSION (confettis)
 // ======================
