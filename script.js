@@ -313,7 +313,6 @@ function showOverlay(flower, onDone){
   isLocked = true;
   hideAllScreens();
 
-  // image dans l’overlay
   overlayFlower.innerHTML = "";
   const big = document.createElement("img");
   big.src = flower.img;
@@ -326,57 +325,24 @@ function showOverlay(flower, onDone){
   overlayText.textContent = flower.message;
 
   overlay.classList.remove("hidden");
-
-  // (Optionnel) on change le texte d’aide
-  const hint = overlay.querySelector(".hint");
-  if (hint) hint.innerHTML = "👆 Touche en dehors de la carte pour continuer";
-
   clearTimers();
 
   const card = overlay.querySelector(".card");
 
-  // IMPORTANT : si on touche la carte, on ne ferme pas
-  const stop = (e) => e.stopPropagation();
-  if (card){
-    card.addEventListener("pointerdown", stop);
-    card.addEventListener("touchstart", stop, { passive: true });
-    card.addEventListener("click", stop);
-  }
-
-  const cleanup = () => {
-    overlay.removeEventListener("pointerdown", onOutside);
-    overlay.removeEventListener("touchstart", onOutsideTouch);
-    overlay.removeEventListener("click", onOutsideClick);
-  };
+  // Indication utilisateur
+  const hint = overlay.querySelector(".hint");
+  if (hint) hint.innerHTML = "👆 Touche la carte pour continuer";
 
   const close = () => {
-    cleanup();
     overlay.classList.add("hidden");
+    card.removeEventListener("pointerdown", close);
+    card.removeEventListener("touchstart", close);
     if (typeof onDone === "function") onDone();
   };
 
-  // Fermeture au tap en dehors (iPhone friendly)
-  const onOutside = (e) => {
-    if (card && card.contains(e.target)) return;
-    close();
-  };
-
-  const onOutsideTouch = (e) => {
-    const t = e.touches && e.touches[0];
-    if (!t) return close();
-    const el = document.elementFromPoint(t.clientX, t.clientY);
-    if (card && el && card.contains(el)) return;
-    close();
-  };
-
-  const onOutsideClick = (e) => {
-    if (card && card.contains(e.target)) return;
-    close();
-  };
-
-  overlay.addEventListener("pointerdown", onOutside);
-  overlay.addEventListener("touchstart", onOutsideTouch, { passive: true });
-  overlay.addEventListener("click", onOutsideClick);
+  // 👉 fermeture UNIQUEMENT en touchant la carte
+  card.addEventListener("pointerdown", close);
+  card.addEventListener("touchstart", close, { passive: true });
 }
 
 function onFlowerClick(flower){
