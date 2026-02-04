@@ -1,1 +1,14 @@
-https://nooshbee.github.io/Appli_bancaire/
+showOverlay(flower, () => {
+  hideAllScreens();
+  if (topHeader) topHeader.classList.add("hideTop");
+
+  // délai 2 secondes avant la demande
+  setTimeout(() => {
+    proposal.classList.remove("hidden");
+    startProposalTimer();
+    isLocked = false;
+  }, 2000);
+});
+
+
+
