@@ -256,8 +256,15 @@ function spawnFloatingFlower(flower){
 
 function buildField(){
   field.innerHTML = "";
-  const copies = 14;
-  for (let i=0; i<copies; i++){
+
+  // 1 fleur de chaque variété (18 visibles)
+  FLOWERS.forEach(flower => {
+    spawnFloatingFlower(flower);
+  });
+
+  // + quelques fleurs en plus pour remplir l'écran (optionnel mais joli)
+  const extra = 6;
+  for (let i = 0; i < extra; i++){
     spawnFloatingFlower(pickFlowerForSpawn());
   }
 }
