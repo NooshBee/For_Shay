@@ -402,3 +402,44 @@ body{
   70%  { transform: scale(1.25); }
   100% { transform: scale(1.45); }
 }
+
+/* ===== VRAI BOUQUET (tiges + ruban + fleurs) ===== */
+.bouquet{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 20;
+}
+
+.bouquetWrap{
+  display:grid;
+  place-items:center;
+  width: 100%;
+}
+
+.bouquetSvg{
+  width: min(420px, 92vw);
+  height: auto;
+  filter: drop-shadow(0 18px 40px rgba(0,0,0,0.45));
+  transform-origin: center;
+  animation: bouquetSway 2.8s ease-in-out infinite;
+}
+
+@keyframes bouquetSway{
+  0%,100%{ transform: translateY(0) rotate(-0.6deg); }
+  50%    { transform: translateY(-3px) rotate(0.6deg); }
+}
+
+/* petite pop à l’apparition */
+.bouquet.show .bouquetSvg{
+  animation: bouquetPop 420ms ease-out both, bouquetSway 2.8s ease-in-out 420ms infinite;
+}
+@keyframes bouquetPop{
+  0%   { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
