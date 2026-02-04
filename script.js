@@ -409,15 +409,23 @@ function gatherFlowersToBouquet(durationMs = 1200){
 // ======================
 // GIFT SEQUENCE
 // ======================
-function playGiftSequence(includeBougain){
+async function playGiftSequence(includeBougain){
   isLocked = true;
   hideAllScreens();
   if (topHeader) topHeader.classList.add("hideTop");
   stopProposalTimer();
 
+  // 🌸 bouquet qui se forme
+  await gatherFlowersToBouquet(1200);
+
+  // ⏳ au lieu de 5s -> tu avais demandé 2s
   setTimeout(() => {
     gift.classList.remove("hidden");
     setupTapToOpenGift(includeBougain);
+
+    // (facultatif) garder les fleurs bloquées pendant le cadeau
+    // lockFlowersClicks(true);
+
     isLocked = false;
   }, 2000);
 }
