@@ -286,7 +286,7 @@ function lockFlowersClicks(lock){
 }
 
 // ======================
-// BOUQUET ANIM (Option A)
+// HEART ANIM
 // ======================
 function gatherFlowersToHeart(durationMs = 1200){
   return new Promise((resolve) => {
@@ -309,11 +309,8 @@ function gatherFlowersToHeart(durationMs = 1200){
 
       const t = (i / total) * Math.PI * 2;
 
-      const x =
-        16 * Math.pow(Math.sin(t), 3);
-
-      const y =
-        13 * Math.cos(t)
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = 13 * Math.cos(t)
         - 5 * Math.cos(2 * t)
         - 2 * Math.cos(3 * t)
         - Math.cos(4 * t);
@@ -321,8 +318,7 @@ function gatherFlowersToHeart(durationMs = 1200){
       const tx = cx + x * scale;
       const ty = cy - y * scale;
 
-      s.el.style.transition =
-        `transform ${durationMs}ms cubic-bezier(.2,.9,.2,1)`;
+      s.el.style.transition = `transform ${durationMs}ms cubic-bezier(.2,.9,.2,1)`;
 
       s.x = tx;
       s.y = ty;
@@ -338,7 +334,43 @@ function gatherFlowersToHeart(durationMs = 1200){
   });
 }
 
-// ✅ CHAÎNE FIXE : overlay -> fermeture -> bouquet -> (2s) -> demande
+// ✅ NOUVEAU : explosion du cœur (en même temps que le cadeau)
+function explodeHeart(durationMs = 650){
+  stopAnimation();
+
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const cx = w * 0.5;
+  const cy = h * 0.48;
+
+  for (const s of flowersState){
+    s.el.style.transition = `transform ${durationMs}ms cubic-bezier(.2,.9,.2,1)`;
+
+    const dx = (s.x - cx) || rand(-1, 1);
+    const dy = (s.y - cy) || rand(-1, 1);
+    const len = Math.hypot(dx, dy) || 1;
+
+    const push = rand(220, 420);
+    let tx = s.x + (dx / len) * push + rand(-30, 30);
+    let ty = s.y + (dy / len) * push + rand(-30, 30);
+
+    // clamp écran
+    tx = Math.max(RADIUS, Math.min(w - RADIUS, tx));
+    ty = Math.max(RADIUS, Math.min(h - RADIUS, ty));
+
+    s.x = tx;
+    s.y = ty;
+    renderOne(s);
+  }
+
+  setTimeout(() => {
+    for (const s of flowersState){
+      s.el.style.transition = "";
+    }
+  }, durationMs + 30);
+}
+
+// ✅ CHAÎNE : overlay -> fermeture -> cœur -> (2s) -> demande
 async function bouquetThenProposal(){
   await gatherFlowersToHeart(1200);
 
@@ -374,7 +406,6 @@ function showOverlay(flower, onDone){
   const card = overlay.querySelector(".card");
   if (!card) return;
 
-  // Si tu n’as plus <p class="hint"> dans le HTML, on le crée
   let hint = overlay.querySelector(".hint");
   if (!hint){
     hint = document.createElement("p");
@@ -394,7 +425,6 @@ function showOverlay(flower, onDone){
     if (typeof onDone === "function") onDone();
   };
 
-  // fermeture en touchant la carte
   card.addEventListener("pointerdown", close);
   card.addEventListener("touchstart", close, { passive: true });
 }
@@ -404,20 +434,16 @@ function onFlowerClick(flower){
 
   const isTarget = (flower.id === TARGET_ID);
 
-  // mauvaise fleur -> overlay -> retour home
   if (!isTarget){
     showOverlay(flower, () => resetToHome());
     return;
   }
 
-  // ✅ bonne fleur -> overlay -> fermeture -> bouquet -> demande
   showOverlay(flower, async () => {
     hideAllScreens();
     if (topHeader) topHeader.classList.add("hideTop");
 
-    // IMPORTANT : éviter interactions pendant la suite
     lockFlowersClicks(true);
-
     await bouquetThenProposal();
   });
 }
@@ -429,16 +455,13 @@ function setHeartBeat(on){
 }
 
 function resumeFloating(){
-  // enlève le coeur qui bat
   setHeartBeat(false);
 
-  // redonne des vitesses et relance les rebonds
   for (const s of flowersState){
     const speed = rand(BOUNCE_SPEED_MIN, BOUNCE_SPEED_MAX);
     const ang = rand(0, Math.PI * 2);
     s.vx = Math.cos(ang) * speed;
     s.vy = Math.sin(ang) * speed;
-
     s.el.style.pointerEvents = "auto";
   }
 
@@ -455,10 +478,6 @@ async function playGiftSequence(includeBougain){
   if (topHeader) topHeader.classList.add("hideTop");
   stopProposalTimer();
 
-  // (Ici tu peux choisir de refaire un bouquet avant cadeau ou non)
-  // await gatherFlowersToBouquet(900);
-
-  // délai 2s avant cadeau (tu voulais 2s au lieu de 5s)
   setTimeout(() => {
     gift.classList.remove("hidden");
     setupTapToOpenGift(includeBougain);
@@ -478,7 +497,6 @@ function setupTapToOpenGift(includeBougain){
   const newBtn = giftBtn.cloneNode(true);
   giftBtn.parentNode.replaceChild(newBtn, giftBtn);
 
-  // ✅ 4 taps (4 août)
   const TOTAL_TAPS = 4;
   let taps = 0;
   let giftOpened = false;
@@ -489,34 +507,42 @@ function setupTapToOpenGift(includeBougain){
     taps += 1;
     const progress = Math.min(1, taps / TOTAL_TAPS);
 
-    // ouverture progressive
     newBtn.style.setProperty("--lid-rot", `${-35 * progress}deg`);
     newBtn.style.setProperty("--lid-up", `${-8 * progress}px`);
 
-    // gonflage progressif à CHAQUE tap
-    const scale = 1 + (progress * 0.22); // 1.00 -> 1.22
+    const scale = 1 + (progress * 0.22);
     newBtn.style.setProperty("--box-scale", String(scale));
 
-    // dernier tap -> gonflage automatique continu (sans dégonfler)
     if (taps >= TOTAL_TAPS){
       giftOpened = true;
 
-      // part du scale courant
       newBtn.style.animation = "autoInflate 1100ms ease-in forwards";
 
       setTimeout(() => {
         gift.classList.add("hidden");
 
-        // si tu ne veux plus de confettis / burst : commente ces 3 lignes
+        // ✅ coeur explose AU MÊME MOMENT
+        explodeHeart(650);
+
+        // (si tu ne veux plus de confettis, commente ces 2 lignes)
         burst.classList.remove("hidden");
         launchBurst(includeBougain);
 
         setTimeout(() => {
-  burst.classList.add("hidden"); // si tu gardes burst
-  resumeFloating();              // ✅ fleurs repartent flotter
-  resetToHome();                 // (si tu veux revenir à l’accueil)
-  buildField();                  // (si tu veux regénérer le champ)
-}, 2800);
+          // (si tu gardes burst)
+          burst.classList.add("hidden");
+
+          // ✅ repart flotter
+          lockFlowersClicks(false);
+          resumeFloating();
+
+          // ✅ retour accueil (tu peux enlever resetToHome si tu veux rester sans le header)
+          resetToHome();
+
+          // ❌ IMPORTANT : on NE rebuild PAS ici (sinon ça "reset" tout)
+          // buildField();
+        }, 2800);
+
       }, 1150);
     }
   });
@@ -573,4 +599,4 @@ window.addEventListener("resize", () => buildField());
 // INIT
 // ======================
 resetToHome();
-buildField(); 
+buildField();
