@@ -310,10 +310,6 @@ function showOverlay(flower, onDone){
   hint.innerHTML = isTarget ? "Bien joué sexy ! 🥳😂" : "👆🏾 Touche la carte pour réessayer 👆🏾";
   // Effets spéciaux si c'est le bougainvillier
   card.classList.toggle("good", isTarget);
-  
-  if (isTarget){
-    if (navigator.vibrate) navigator.vibrate([40, 30, 40]);
-  }
 
   const close = () => {
     card.classList.remove("good");
