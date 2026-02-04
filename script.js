@@ -327,28 +327,56 @@ function showOverlay(flower, onDone){
 
   overlay.classList.remove("hidden");
 
-  // On cache le compteur (si tu veux le laisser dans le HTML, on le neutralise)
-  countdownEl.textContent = "";
+  // (Optionnel) on change le texte d’aide
+  const hint = overlay.querySelector(".hint");
+  if (hint) hint.innerHTML = "👆 Touche en dehors de la carte pour continuer";
 
   clearTimers();
 
-  // Fermer en cliquant en dehors de la carte
   const card = overlay.querySelector(".card");
 
+  // IMPORTANT : si on touche la carte, on ne ferme pas
+  const stop = (e) => e.stopPropagation();
+  if (card){
+    card.addEventListener("pointerdown", stop);
+    card.addEventListener("touchstart", stop, { passive: true });
+    card.addEventListener("click", stop);
+  }
+
+  const cleanup = () => {
+    overlay.removeEventListener("pointerdown", onOutside);
+    overlay.removeEventListener("touchstart", onOutsideTouch);
+    overlay.removeEventListener("click", onOutsideClick);
+  };
+
   const close = () => {
+    cleanup();
     overlay.classList.add("hidden");
-    overlay.removeEventListener("click", onOverlayClick);
     if (typeof onDone === "function") onDone();
   };
 
-  const onOverlayClick = (e) => {
-    // si on clique DANS la carte => on ne ferme pas
+  // Fermeture au tap en dehors (iPhone friendly)
+  const onOutside = (e) => {
     if (card && card.contains(e.target)) return;
     close();
   };
 
-  // IMPORTANT: on écoute le clic sur tout l’overlay
-  overlay.addEventListener("click", onOverlayClick);
+  const onOutsideTouch = (e) => {
+    const t = e.touches && e.touches[0];
+    if (!t) return close();
+    const el = document.elementFromPoint(t.clientX, t.clientY);
+    if (card && el && card.contains(el)) return;
+    close();
+  };
+
+  const onOutsideClick = (e) => {
+    if (card && card.contains(e.target)) return;
+    close();
+  };
+
+  overlay.addEventListener("pointerdown", onOutside);
+  overlay.addEventListener("touchstart", onOutsideTouch, { passive: true });
+  overlay.addEventListener("click", onOutsideClick);
 }
 
 function onFlowerClick(flower){
