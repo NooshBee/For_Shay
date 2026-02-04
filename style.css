@@ -364,4 +364,44 @@ h1{
 .hideTop{
   opacity: 0;
   pointer-events: none;
+  
+  /* --- HEADER CARD (opaque) --- */
+.top{
+  position:absolute;
+  left:50%;
+  top:45%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  pointer-events:none;
+  width: min(520px, 92vw);
+  text-align:center;
+}
+
+/* La carte opaque */
+.top .topCard{
+  display:inline-block;
+  padding: 18px 22px;
+  border-radius: 22px;
+
+  background: rgba(26, 16, 51, 0.82); /* violet opaque */
+  border: 1px solid rgba(255,255,255,0.10);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+}
+
+/* Le texte */
+.top h1{
+  margin: 0;
+  font-size: 1.65rem;
+}
+
+/* L’emoji */
+.top .topEmoji{
+  margin-top: 10px;
+  font-size: 3rem;
+  line-height: 1;
+}
 }
