@@ -312,10 +312,7 @@ function showOverlay(flower, onDone){
   card.classList.toggle("good", isTarget);
   
   if (isTarget){
-    // petite vibration (si supportée)
-    try{
-      if (navigator.vibrate) navigator.vibrate([40, 30, 40]);
-    }
+    if (navigator.vibrate) navigator.vibrate([40, 30, 40]);
   }
 
   const close = () => {
